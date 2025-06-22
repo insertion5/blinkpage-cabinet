@@ -1,0 +1,26 @@
+
+{% extends 'cabinet/base.html' %}
+{% block title %}Детали заказа{% endblock %}
+{% block content %}
+<h2>Заказ: {{ order.get_site_type_display }}</h2>
+<p>Статус: {{ order.get_status_display }}</p>
+<p>Сумма: {{ order.total_price }} ₽</p>
+
+<h3>Услуги:</h3>
+<ul>
+    {% for service in order.services.all %}
+        <li>{{ service.name }} ({{ service.price }} ₽)</li>
+    {% empty %}
+        <li>Нет доп. услуг</li>
+    {% endfor %}
+</ul>
+
+<h3>Комментарии:</h3>
+<ul>
+    {% for comment in comments %}
+        <li><strong>{{ comment.author.email }}</strong>: {{ comment.text }}</li>
+    {% empty %}
+        <li>Нет комментариев.</li>
+    {% endfor %}
+</ul>
+{% endblock %}

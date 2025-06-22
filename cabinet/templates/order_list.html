@@ -1,0 +1,16 @@
+
+{% extends 'cabinet/base.html' %}
+{% block title %}Мои заказы{% endblock %}
+{% block content %}
+<h2>Мои заказы</h2>
+{% for order in orders %}
+    <div class="card">
+        <strong>{{ order.get_site_type_display }}</strong><br>
+        Статус: {{ order.get_status_display }}<br>
+        Сумма: {{ order.total_price }} ₽<br>
+        <a class="btn" href="/orders/{{ order.pk }}/">Подробнее</a>
+    </div>
+{% empty %}
+    <p>У вас пока нет заказов.</p>
+{% endfor %}
+{% endblock %}
